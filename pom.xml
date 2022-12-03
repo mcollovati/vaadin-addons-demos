@@ -4,10 +4,20 @@
     <modelVersion>4.0.0</modelVersion>
     <!-- Project from https://start.vaadin.com/project/6eff10d5-5c3f-4d0e-996b-4a5f80499e64 -->
     <groupId>com.github.mcollovati.addons</groupId>
-    <artifactId>add-ondemos</artifactId>
-    <name>add-ondemos</name>
+    <artifactId>add-on-demos</artifactId>
+    <name>add-on-demos</name>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
+
+    <organization>
+        <name>Marco Collovati</name>
+        <url>https://github.com/mcollovati</url>
+    </organization>
+    <inceptionYear>2016-2022</inceptionYear>
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/mcollovati/vaadin-spinkit/issues</url>
+    </issueManagement>
 
     <properties>
         <java.version>17</java.version>
@@ -15,7 +25,8 @@
         <!-- this parameter is needed as spring-boot bom overwrites it -->
         <selenium.version>4.5.3</selenium.version>
         <!-- selenium is so much verbose -->
-        <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>        
+        <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
+        <twitter-widgets.version>3.0.2</twitter-widgets.version>
     </properties>
 
     <parent>
@@ -83,9 +94,17 @@
     <dependencies>
         <dependency>
             <groupId>com.vaadin</groupId>
-            <!-- Replace artifactId with vaadin-core to use only free components -->
-            <artifactId>vaadin</artifactId>
+            <artifactId>vaadin-core</artifactId>
         </dependency>
+
+        <!-- addons -->
+        <dependency>
+            <groupId>org.vaadin.addon</groupId>
+            <artifactId>twitter-widgets</artifactId>
+            <version>${twitter-widgets.version}</version>
+        </dependency>
+
+
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-spring-boot-starter</artifactId>
@@ -141,6 +160,16 @@
                     <jvmArguments>-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5460</jvmArguments>
                     <wait>500</wait>
                     <maxAttempts>240</maxAttempts>
+                    <image>
+                        <name>ghcr.io/mcollovati/${project.artifactId}</name>
+                        <publish>true</publish>
+                    </image>
+                    <docker>
+                        <publishRegistry>
+                            <username>mcollovati</username>
+                            <password>${github.registry.token}</password>
+                        </publishRegistry>
+                    </docker>
                 </configuration>
             </plugin>
 
