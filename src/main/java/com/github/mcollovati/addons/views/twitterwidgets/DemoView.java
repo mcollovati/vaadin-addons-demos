@@ -45,7 +45,6 @@ import com.vaadin.flow.router.internal.HasUrlParameterFormat;
 
 @PageTitle("Twitter widgets Add-on Demo")
 @JsModule("./twitter-widgets/shared-styles.js")
-@Route("")
 @RoutePrefix("twitter-widgets")
 @SuppressWarnings("serial")
 public class DemoView extends HorizontalLayout

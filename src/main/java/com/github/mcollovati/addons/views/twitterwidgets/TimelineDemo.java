@@ -27,6 +27,7 @@ import com.vaadin.flow.router.RouteAlias;
  * Created by marco on 14/06/16.
  */
 @Route(value = "timeline", layout = DemoView.class)
+@RouteAlias(value = "", layout = DemoView.class)
 public class TimelineDemo extends DemoComponent {
 
     public TimelineDemo() {
