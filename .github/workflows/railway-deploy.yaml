@@ -3,6 +3,11 @@ name: Deploy to Railway
 on:
   push:
     branches: [main]
+    paths:
+      - 'src/**'
+      - 'frontend/**'
+      - 'pom.xml'
+      - 'Dockerfile'
   workflow_dispatch:
 
 jobs:
