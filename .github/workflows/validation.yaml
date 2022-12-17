@@ -6,7 +6,7 @@ on:
 permissions:
   contents: read
 jobs:
-  deploy:
+  buildpr:
     runs-on: ubuntu-22.04
 
     steps:
