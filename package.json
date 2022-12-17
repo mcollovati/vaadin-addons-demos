@@ -109,7 +109,8 @@
     "line-awesome": "1.3.0",
     "lit": "2.3.0",
     "markdown-it": "13.0.1",
-    "markdown-it-highlightjs": "4.0.1"
+    "markdown-it-highlightjs": "4.0.1",
+    "materialize-css": "next"
   },
   "devDependencies": {
     "@rollup/plugin-replace": "3.1.0",
@@ -235,7 +236,8 @@
       "line-awesome": "1.3.0",
       "lit": "2.3.0",
       "markdown-it": "13.0.1",
-      "markdown-it-highlightjs": "4.0.1"
+      "markdown-it-highlightjs": "4.0.1",
+      "materialize-css": "next"
     },
     "devDependencies": {
       "@rollup/plugin-replace": "3.1.0",
@@ -253,7 +255,7 @@
       "workbox-core": "6.5.0",
       "workbox-precaching": "6.5.0"
     },
-    "hash": "fc9d65ee85605e9e20ec1a3f2fcf4ff2cd3ac37578082497589cec946383fc25"
+    "hash": "15b494d58185e1b51bd3de4be7b161e1e74b9d632cbe1b78fa07450fe3ac8d0e"
   },
   "overrides": {
     "@vaadin/bundles": "$@vaadin/bundles",

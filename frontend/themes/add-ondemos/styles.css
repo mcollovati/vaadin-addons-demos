@@ -1,1 +1,15 @@
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 @import url('line-awesome/dist/line-awesome/css/line-awesome.min.css');
+@import url('materialize-css/dist/css/materialize.min.css');
+
+.icon-block {
+  padding: 0 15px;
+}
+.icon-block .material-icons {
+    font-size: inherit;
+}
+.card-title.over {
+    display: inline-block;
+    width: 100%;
+    opacity: 0.95;
+}

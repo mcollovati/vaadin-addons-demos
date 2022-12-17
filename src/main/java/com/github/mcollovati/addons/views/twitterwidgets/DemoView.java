@@ -19,6 +19,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import org.vaadin.addon.twitter.TweetButton;
 
@@ -44,16 +45,17 @@ import com.vaadin.flow.router.internal.HasUrlParameterFormat;
 
 @PageTitle("Twitter widgets Add-on Demo")
 @JsModule("./twitter-widgets/shared-styles.js")
-@Route("twitter-widgets")
+@Route("")
 @RoutePrefix("twitter-widgets")
 @SuppressWarnings("serial")
-public class DemoView extends HorizontalLayout implements RouterLayout, BeforeEnterObserver {
+public class DemoView extends HorizontalLayout
+        implements RouterLayout, BeforeEnterObserver {
 
     private final List<Markdown> markdown = Arrays.asList(
-            readMarkdown("timeline.md"), readMarkdown("single_tweet.md"), readMarkdown("follow_button.md"),
-            readMarkdown("share_button.md"), readMarkdown("hashtag_button.md"), readMarkdown("mention_button.md"),
-            readMarkdown("dynamic_opts.md")
-    );
+            readMarkdown("timeline.md"), readMarkdown("single_tweet.md"),
+            readMarkdown("follow_button.md"), readMarkdown("share_button.md"),
+            readMarkdown("hashtag_button.md"),
+            readMarkdown("mention_button.md"), readMarkdown("dynamic_opts.md"));
     private final Div demoArea;
     private final Tabs tabs;
     private final Div info;
@@ -74,10 +76,14 @@ public class DemoView extends HorizontalLayout implements RouterLayout, BeforeEn
 
         tabs.add(new PageTab<>("Timeline", TimelineDemo.class));
         tabs.add(new PageTab<>("Single Tweet", TweetDemo.class));
-        tabs.add(new PageTab<>("Follow Button", ButtonDemo.class, TweetButton.Type.Follow.name()));
-        tabs.add(new PageTab<>("Share Button", ButtonDemo.class, TweetButton.Type.Share.name()));
-        tabs.add(new PageTab<>("Hashtag Button", ButtonDemo.class, TweetButton.Type.Hashtag.name()));
-        tabs.add(new PageTab<>("Mention Button", ButtonDemo.class, TweetButton.Type.Mention.name()));
+        tabs.add(new PageTab<>("Follow Button", ButtonDemo.class,
+                TweetButton.Type.Follow.name()));
+        tabs.add(new PageTab<>("Share Button", ButtonDemo.class,
+                TweetButton.Type.Share.name()));
+        tabs.add(new PageTab<>("Hashtag Button", ButtonDemo.class,
+                TweetButton.Type.Hashtag.name()));
+        tabs.add(new PageTab<>("Mention Button", ButtonDemo.class,
+                TweetButton.Type.Mention.name()));
         tabs.add(new PageTab<>("Change Tweet Options", DynamicDemo.class));
         tabs.addSelectedChangeListener(event -> {
             PageTab pageTab = (PageTab) tabs.getSelectedTab();
@@ -86,12 +92,8 @@ public class DemoView extends HorizontalLayout implements RouterLayout, BeforeEn
         });
         tabs.setSelectedIndex(0);
 
-
-        VerticalLayout demoView = new VerticalLayout(
-                tabs, demoArea
-        );
+        VerticalLayout demoView = new VerticalLayout(tabs, demoArea);
         add(info, demoView);
-
 
         setFlexGrow(4, info);
         setFlexGrow(6, demoView);
@@ -105,21 +107,23 @@ public class DemoView extends HorizontalLayout implements RouterLayout, BeforeEn
     @Override
     public void showRouterLayoutContent(HasElement content) {
         if (content != null) {
-            demoArea.getElement().appendChild(Objects.requireNonNull(content.getElement()));
+            demoArea.getElement()
+                    .appendChild(Objects.requireNonNull(content.getElement()));
         }
     }
 
     @Override
     public void beforeEnter(BeforeEnterEvent event) {
-        tabs.getChildren()
-                .filter(PageTab.class::isInstance)
-                .map(PageTab.class::cast)
-                .filter(p -> p.isSelected(event))
-                .findFirst()
-                .ifPresent(t -> {
-                    tabs.setSelectedTab(t);
-                    updateInfoPanel();
-                });
+        List<PageTab> pageTabs = tabs.getChildren()
+                .filter(PageTab.class::isInstance).map(PageTab.class::cast)
+                .collect(Collectors.toList());
+        if (!pageTabs.isEmpty()) {
+            pageTabs.stream().filter(p -> p.isSelected(event)).findFirst()
+                    .ifPresentOrElse(t -> {
+                        tabs.setSelectedTab(t);
+                        updateInfoPanel();
+                    }, () -> pageTabs.get(0).navigate(event.getUI()));
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -150,7 +154,8 @@ public class DemoView extends HorizontalLayout implements RouterLayout, BeforeEn
             Router router = event.getSource();
             if (HasUrlParameter.class.isAssignableFrom(demoPage)) {
                 url = router.getRegistry()
-                        .getTargetUrl(demoPage, HasUrlParameterFormat.getParameters(parameter))
+                        .getTargetUrl(demoPage,
+                                HasUrlParameterFormat.getParameters(parameter))
                         .orElse(null);
             } else {
                 url = router.getRegistry().getTargetUrl(demoPage).orElse(null);
@@ -159,41 +164,39 @@ public class DemoView extends HorizontalLayout implements RouterLayout, BeforeEn
         }
     }
 
-
     /*
-    @Override
-    protected void init(VaadinRequest request) {
-        Responsive.makeResponsive(this);
-        CssLayout info = new CssLayout();
-        info.setStyleName("tw-docs");
-        info.addComponent(markdown.get(0));
-
-        TabSheet tabSheet = new TabSheet();
-        tabSheet.setStyleName("tw-demo-tab");
-        tabSheet.addStyleName(ValoTheme.TABSHEET_CENTERED_TABS);
-        tabSheet.setSizeFull();
-        tabSheet.addTab(new TimelineDemo()).setCaption("Timeline");
-        tabSheet.addTab(new TweetDemo()).setCaption("Single Tweet");
-        tabSheet.addTab(new ButtonDemo(TweetButton.Type.Follow)).setCaption("Follow Button");
-        tabSheet.addTab(new ButtonDemo(TweetButton.Type.Share)).setCaption("Share Button");
-        tabSheet.addTab(new ButtonDemo(TweetButton.Type.Hashtag)).setCaption("Hashtag Button");
-        tabSheet.addTab(new ButtonDemo(TweetButton.Type.Mention)).setCaption("Mention Button");
-        tabSheet.addSelectedTabChangeListener(event -> {
-            Component old = info.getComponent(0);
-            Component newComp = markdown.get(tabSheet.getTabPosition(tabSheet.getTab(tabSheet.getSelectedTab())));
-            info.replaceComponent(old, newComp);
-        });
-        final MHorizontalLayout lay out = new MHorizontalLayout(info, tabSheet)
-            .withExpand(info, 4)
-            .withExpand(tabSheet, 6)
-            .withFullWidth().withFullHeight()
-            .withMargin(false).withSpacing(true);
-        setContent(new MPanel(layout).withFullWidth().withFullHeight().withStyleName(ValoTheme.PANEL_WELL, "root-container"));
-
-    }
-*/
+     * @Override protected void init(VaadinRequest request) {
+     * Responsive.makeResponsive(this); CssLayout info = new CssLayout();
+     * info.setStyleName("tw-docs"); info.addComponent(markdown.get(0));
+     * 
+     * TabSheet tabSheet = new TabSheet(); tabSheet.setStyleName("tw-demo-tab");
+     * tabSheet.addStyleName(ValoTheme.TABSHEET_CENTERED_TABS);
+     * tabSheet.setSizeFull(); tabSheet.addTab(new
+     * TimelineDemo()).setCaption("Timeline"); tabSheet.addTab(new
+     * TweetDemo()).setCaption("Single Tweet"); tabSheet.addTab(new
+     * ButtonDemo(TweetButton.Type.Follow)).setCaption("Follow Button");
+     * tabSheet.addTab(new
+     * ButtonDemo(TweetButton.Type.Share)).setCaption("Share Button");
+     * tabSheet.addTab(new
+     * ButtonDemo(TweetButton.Type.Hashtag)).setCaption("Hashtag Button");
+     * tabSheet.addTab(new
+     * ButtonDemo(TweetButton.Type.Mention)).setCaption("Mention Button");
+     * tabSheet.addSelectedTabChangeListener(event -> { Component old =
+     * info.getComponent(0); Component newComp =
+     * markdown.get(tabSheet.getTabPosition(tabSheet.getTab(tabSheet.
+     * getSelectedTab()))); info.replaceComponent(old, newComp); }); final
+     * MHorizontalLayout lay out = new MHorizontalLayout(info, tabSheet)
+     * .withExpand(info, 4) .withExpand(tabSheet, 6)
+     * .withFullWidth().withFullHeight() .withMargin(false).withSpacing(true);
+     * setContent(new
+     * MPanel(layout).withFullWidth().withFullHeight().withStyleName(ValoTheme.
+     * PANEL_WELL, "root-container"));
+     * 
+     * }
+     */
     private static Markdown readMarkdown(String markdown) {
-        try (Scanner sc = new Scanner(DemoView.class.getResourceAsStream(markdown))) {
+        try (Scanner sc = new Scanner(
+                DemoView.class.getResourceAsStream(markdown))) {
             Markdown rt = new Markdown();
             rt.setMarkdown(sc.useDelimiter("\\A").next());
             return rt;
