@@ -167,7 +167,7 @@
                     </image>
                     <docker>
                         <publishRegistry>
-                            <username>mcollovati</username>
+                            <username>${github.registry.username}</username>
                             <password>${github.registry.token}</password>
                         </publishRegistry>
                     </docker>
