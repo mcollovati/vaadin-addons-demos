@@ -20,7 +20,7 @@ jobs:
           distribution: 'temurin'
 
       - name: Build application
-        run: ./mvnw -ntp -B -Pproduction spring-boot:build-image -Dgithub.registry.token=${{secrets.GITHUB_TOKEN}} -Dgithub.registry.username=${{ qgithub.actor }}
+        run: ./mvnw -ntp -B -Pproduction spring-boot:build-image -Dgithub.registry.token=${{secrets.GITHUB_TOKEN}} -Dgithub.registry.username=${{ github.actor }}
 
       - name: Install Railway
         run: curl -fsSL https://railway.app/install.sh | sh
