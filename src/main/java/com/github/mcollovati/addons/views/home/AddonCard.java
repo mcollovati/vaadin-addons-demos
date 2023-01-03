@@ -42,7 +42,7 @@ public class AddonCard extends Div {
     private Component cardActions(Addon addon) {
         Div div = new Div(new RouterLink("Demo", addon.getDemoView()),
                 new Anchor(
-                        "https://github.com/mcollovati/vaadin-twitter-widgets",
+                        addon.getGithubURL(),
                         "GitHub"));
         div.setClassName("card-action");
         return div;

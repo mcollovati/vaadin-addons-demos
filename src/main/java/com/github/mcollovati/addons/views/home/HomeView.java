@@ -1,5 +1,6 @@
 package com.github.mcollovati.addons.views.home;
 
+import com.github.mcollovati.addons.views.spinkit.SpinkitAddon;
 import com.github.mcollovati.addons.views.twitterwidgets.TwitterWidgetsAddon;
 
 import com.vaadin.flow.component.html.H1;
@@ -23,7 +24,8 @@ public class HomeView extends VerticalLayout {
         H1 title = new H1("My Vaadin Addon Demos");
         title.setClassName("header center light-green-text");
         add(title,
-                new HorizontalLayout(new AddonCard(new TwitterWidgetsAddon())));
+                new HorizontalLayout(new AddonCard(new TwitterWidgetsAddon()),
+                        new AddonCard(new SpinkitAddon())));
 
     }
 

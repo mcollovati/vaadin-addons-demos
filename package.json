@@ -111,7 +111,8 @@
     "lit": "2.4.1",
     "markdown-it": "13.0.1",
     "markdown-it-highlightjs": "4.0.1",
-    "materialize-css": "next"
+    "materialize-css": "next",
+    "spinkit": "^2.0.0"
   },
   "devDependencies": {
     "@rollup/plugin-replace": "3.1.0",
@@ -238,6 +239,7 @@
     "markdown-it-highlightjs": "$markdown-it-highlightjs",
     "highlight.js": "$highlight.js",
     "date-fns": "$date-fns",
+    "spinkit": "$spinkit",
     "line-awesome": "$line-awesome"
   },
   "vaadin": {
@@ -351,7 +353,8 @@
       "lit": "2.4.1",
       "markdown-it": "13.0.1",
       "markdown-it-highlightjs": "4.0.1",
-      "materialize-css": "next"
+      "materialize-css": "next",
+      "spinkit": "^2.0.0"
     },
     "devDependencies": {
       "@rollup/plugin-replace": "3.1.0",
@@ -369,6 +372,6 @@
       "workbox-core": "6.5.4",
       "workbox-precaching": "6.5.4"
     },
-    "hash": "39fd266debd639a965234bb866329dc7166b26d9294b98b20e21b3a2c69689c1"
+    "hash": "d4978b329139b6f365b934a894a45314ecd39ae484ca6a4d7d1682cbce8e5a78"
   }
 }

@@ -27,7 +27,10 @@
         <selenium.version>4.5.3</selenium.version>
         <!-- selenium is so much verbose -->
         <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
+
+
         <twitter-widgets.version>3.0.2</twitter-widgets.version>
+        <spinkit.version>3.0.0</spinkit.version>
     </properties>
 
     <parent>
@@ -103,6 +106,11 @@
             <groupId>org.vaadin.addon</groupId>
             <artifactId>twitter-widgets</artifactId>
             <version>${twitter-widgets.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.vaadin</groupId>
+            <artifactId>spinkit</artifactId>
+            <version>${spinkit.version}</version>
         </dependency>
 
 
