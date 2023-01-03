@@ -15,6 +15,10 @@
  */
 package com.github.mcollovati.addons.commons;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.CssImport;
@@ -25,13 +29,25 @@ import com.vaadin.flow.component.dependency.NpmPackage;
 @NpmPackage.Container(value = {
         @NpmPackage(value = "markdown-it", version = "13.0.1"),
         @NpmPackage(value = "markdown-it-highlightjs", version = "4.0.1"),
-        @NpmPackage(value = "highlight.js", version = "11.7.0")
-})
+        @NpmPackage(value = "highlight.js", version = "11.7.0") })
 @CssImport(value = "highlight.js/styles/github.css", themeFor = "markdown-element")
 @JsModule("./commons/markdown-template.js")
 public class Markdown extends Component {
 
     public Markdown() {
+    }
+
+    public Markdown(InputStream inputStream) {
+        try {
+            setMarkdown(new String(inputStream.readAllBytes(),
+                    StandardCharsets.UTF_8));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public Markdown(String markdown) {
+        setMarkdown(markdown);
     }
 
     public void setMarkdown(String markdown) {
