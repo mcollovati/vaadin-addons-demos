@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.mcollovati.addons.views.twitterwidgets;
+package com.github.mcollovati.addons.commons;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Tag;
@@ -28,7 +28,7 @@ import com.vaadin.flow.component.dependency.NpmPackage;
         @NpmPackage(value = "highlight.js", version = "11.7.0")
 })
 @CssImport(value = "highlight.js/styles/github.css", themeFor = "markdown-element")
-@JsModule("./twitter-widgets/markdown-template.js")
+@JsModule("./commons/markdown-template.js")
 public class Markdown extends Component {
 
     public Markdown() {
