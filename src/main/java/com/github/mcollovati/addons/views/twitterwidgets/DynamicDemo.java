@@ -71,7 +71,6 @@ public class DynamicDemo extends Composite<HorizontalLayout> {
 
         ComboBox<T> comboBox = new ComboBox<>();
         comboBox.setRequired(true);
-        comboBox.setPreventInvalidInput(true);
         comboBox.setAllowCustomValue(false);
         comboBox.setItems(EnumSet.<T>allOf((Class<T>)defValue.getClass()));
         comboBox.setValue(defValue);

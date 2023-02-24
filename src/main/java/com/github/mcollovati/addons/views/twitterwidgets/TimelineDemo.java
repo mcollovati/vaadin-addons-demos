@@ -34,6 +34,7 @@ public class TimelineDemo extends DemoComponent {
         add(
             createTimeline("Profile Timeline",
                 Timeline.profile("vaadin")),
+            /*
             createTimeline("Likes Timeline",
                 Timeline.likes("vaadin")
                     .withBorderColor("green")
@@ -42,12 +43,13 @@ public class TimelineDemo extends DemoComponent {
                 .enableDoNotTrack()
                 .withHashtag("#vaadin", "#twitter")
             ),
-            createTimeline("Collection Timeline",
-                Timeline.collection("393773266801659904")),
-            createTimeline("URL Timeline",
-                Timeline.url("https://twitter.com/twitterdev/likes")),
-            createTimeline("Widget Timeline",
-                Timeline.widget("738372609797173249")),
+             */
+            //createTimeline("Collection Timeline",
+            //    Timeline.collection("393773266801659904")),
+            //createTimeline("URL Timeline",
+            //    Timeline.url("https://twitter.com/twitterdev/likes")),
+            //createTimeline("Widget Timeline",
+            //    Timeline.widget("738372609797173249")),
             createTimeline("List Timeline",
                 Timeline.list("vaadin", "vaadin-users"))
         );
