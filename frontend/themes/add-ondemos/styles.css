@@ -14,3 +14,8 @@
     width: 100%;
     opacity: 0.95;
 }
+
+hr.nav-item {
+    height: 1px;
+    width: 100%;
+}

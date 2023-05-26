@@ -8,6 +8,7 @@ import com.github.mcollovati.addons.views.home.HomeView;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.html.Hr;
 import com.vaadin.flow.component.sidenav.SideNav;
 import com.vaadin.flow.component.sidenav.SideNavItem;
 
@@ -24,6 +25,9 @@ public class MainLayout extends AppLayout {
         addons.stream().map(
                 addon -> new SideNavItem(addon.getName(), addon.getDemoView()))
                 .forEach(sideNav::addItem);
+        Hr separator = new Hr();
+        separator.addClassName("nav-item");
+        sideNav.addItem(new SideNavItem("", (String)null, separator));
         sideNav.addItem(new SideNavItem("Home", HomeView.class));
 
         addToDrawer(sideNav);
