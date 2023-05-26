@@ -1,11 +1,18 @@
 package com.github.mcollovati.addons;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.vaadin.flow.component.dependency.NpmPackage;
 import com.vaadin.flow.component.page.AppShellConfigurator;
 import com.vaadin.flow.server.PWA;
 import com.vaadin.flow.theme.Theme;
+
+import com.github.mcollovati.addons.model.Addon;
+import com.github.mcollovati.addons.views.spinkit.SpinkitAddon;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 /**
  * The entry point of the Spring Boot application.

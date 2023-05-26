@@ -22,6 +22,7 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import com.github.mcollovati.addons.commons.Markdown;
+import com.github.mcollovati.addons.views.MainLayout;
 import org.vaadin.addon.twitter.TweetButton;
 
 import com.vaadin.flow.component.Component;
@@ -39,6 +40,7 @@ import com.vaadin.flow.router.BeforeEnterEvent;
 import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.PageTitle;
+import com.vaadin.flow.router.ParentLayout;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RoutePrefix;
 import com.vaadin.flow.router.Router;
@@ -48,6 +50,7 @@ import com.vaadin.flow.router.internal.HasUrlParameterFormat;
 @PageTitle("Twitter widgets Add-on Demo")
 @JsModule("./twitter-widgets/shared-styles.js")
 @RoutePrefix("twitter-widgets")
+@ParentLayout(MainLayout.class)
 @SuppressWarnings("serial")
 public class DemoView extends HorizontalLayout
         implements RouterLayout, BeforeEnterObserver {
@@ -62,7 +65,6 @@ public class DemoView extends HorizontalLayout
     private final Div info;
 
     public DemoView() {
-        setSizeFull();
         addClassName("root-container");
 
         info = new Div(markdown.get(0));
