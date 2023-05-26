@@ -23,6 +23,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import com.github.mcollovati.addons.commons.Markdown;
+import com.github.mcollovati.addons.views.MainLayout;
 import org.vaadin.spinkit.Spinner;
 import org.vaadin.spinkit.SpinnerSize;
 import org.vaadin.spinkit.SpinnerType;
@@ -43,7 +44,7 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
 @PageTitle("Vaadin Spinkit Add-on Demo")
-@Route("spinkit")
+@Route(value = "spinkit", layout = MainLayout.class)
 public class SpinkitView extends Div {
 
     public SpinkitView() {
@@ -59,7 +60,6 @@ public class SpinkitView extends Div {
                 getClass().getResourceAsStream("about.md"));
 
         VerticalLayout layout = new VerticalLayout();
-        layout.setSizeFull();
         layout.add(info);
         layout.addAndExpand(tabSheet);
         add(layout);
