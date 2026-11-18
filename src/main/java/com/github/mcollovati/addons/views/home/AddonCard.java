@@ -10,7 +10,6 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.router.RouterLink;
-import com.vaadin.flow.server.StreamResource;
 
 public class AddonCard extends Div {
 
@@ -20,15 +19,12 @@ public class AddonCard extends Div {
     }
 
     private Div cardImage(Addon addon) {
-        String imagePath = "META-INF/resources/images/"
-                + addon.getImagePreview();
         Span span = new Span(addon.getName());
         span.addClassNames("card-title", "light-green", "over");
-        Div div = new Div(new Image(
-                new StreamResource(addon.getImagePreview(),
-                        () -> getClass().getClassLoader()
-                                .getResourceAsStream(imagePath)),
-                addon.getName()), span);
+        // Images are in META-INF/resources/images, served as static resources
+        Div div = new Div(
+                new Image("images/" + addon.getImagePreview(), addon.getName()),
+                span);
         div.setClassName("card-image");
         return div;
     }

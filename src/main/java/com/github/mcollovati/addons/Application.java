@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.vaadin.flow.component.dependency.NpmPackage;
+import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.page.AppShellConfigurator;
 import com.vaadin.flow.server.PWA;
 import com.vaadin.flow.theme.Theme;
+import com.vaadin.flow.theme.lumo.Lumo;
 
 import com.github.mcollovati.addons.model.Addon;
 import com.github.mcollovati.addons.views.spinkit.SpinkitAddon;
@@ -23,6 +25,7 @@ import org.springframework.context.annotation.Bean;
  */
 @SpringBootApplication
 @Theme(value = "add-ondemos")
+@StyleSheet(Lumo.UTILITY_STYLESHEET)
 @NpmPackage(value = "line-awesome", version = "1.3.0")
 @NpmPackage(value = "materialize-css", version = "next")
 public class Application implements AppShellConfigurator {
