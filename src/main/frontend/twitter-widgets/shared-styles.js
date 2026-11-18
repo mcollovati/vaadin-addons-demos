@@ -1,8 +1,7 @@
-import '@polymer/polymer/lib/elements/custom-style.js';
 const documentContainer = document.createElement('template');
 
 documentContainer.innerHTML = `
-<custom-style>
+
     <!-- This is where your App's styling should go. You can use .css files too. -->
     <style>
     .tw-docs {
@@ -62,6 +61,6 @@ documentContainer.innerHTML = `
     }
 
     </style>
-</custom-style>`;
+`;
 
 document.head.appendChild(documentContainer.content);

@@ -15,8 +15,8 @@ IDEs](https://vaadin.com/docs/latest/guide/step-by-step/importing) (Eclipse, Int
 
 ## Deploying to Production
 
-To create a production build, call `mvnw clean package -Pproduction` (Windows),
-or `./mvnw clean package -Pproduction` (Mac & Linux).
+To create a production build, call `mvnw clean package` (Windows),
+or `./mvnw clean package` (Mac & Linux).
 This will build a JAR file with all the dependencies and front-end resources,
 ready to be deployed. The file can be found in the `target` folder after the build completes.
 
@@ -52,7 +52,7 @@ Once the JAR file is built, you can run it using
 To build the Dockerized version of the project, run
 
 ```
-mvn clean package -Pproduction
+mvn clean package
 docker build . -t add-ondemos:latest
 ```
 
